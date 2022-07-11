@@ -34,9 +34,9 @@ public class LivrosResources {
 		
 		livro = livrosRepository.save(livro);
 		
-		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("{/id}").buildAndExpand(livro).toUri();
+		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(livro.getId()).toUri();
 		
-		return ResponseEntity.created(uri).build();
+		return ResponseEntity.created(uri).build(); // coloca no location do header onde ficou 
 	}
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
