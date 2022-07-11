@@ -3,12 +3,21 @@ package com.algaworks.socialbooks.domain;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Transient;
+
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
+@Entity
 public class Livro {
 	
-	@JsonInclude(Include.NON_NULL)
+	@Id // DIZ QUE ESSE ATRIBUTOR SERÁ O ID
+	@GeneratedValue(strategy = GenerationType.IDENTITY) // GERA O ID
+	@JsonInclude(Include.NON_NULL) // SE FOR NULO NÃO RETORNA NO JSON
 	private Long id;
 	
 	@JsonInclude(Include.NON_NULL)
@@ -24,6 +33,7 @@ public class Livro {
 	private String resumo;
 	
 	@JsonInclude(Include.NON_NULL)
+	@Transient
 	private List<Comentario> comentarios;
 	
 	@JsonInclude(Include.NON_NULL)
