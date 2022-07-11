@@ -1,5 +1,6 @@
 package com.algaworks.socialbooks.resources;
 
+import java.net.URI;
 import java.util.List;
 import java.util.Optional;
 
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.algaworks.socialbooks.domain.Livro;
 import com.algaworks.socialbooks.repository.LivrosRepository;
@@ -28,8 +30,13 @@ public class LivrosResources {
 	}
 	
 	@RequestMapping(method = RequestMethod.POST)
-	public void salvar(@RequestBody Livro livro) { //@RequestBody usado para pegar requisição e colocar no objeto
-		livrosRepository.save(livro);
+	public ResponseEntity<Void> salvar(@RequestBody Livro livro) { //@RequestBody usado para pegar requisição e colocar no objeto
+		
+		livro = livrosRepository.save(livro);
+		
+		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("{/id}").buildAndExpand(livro).toUri();
+		
+		return ResponseEntity.created(uri).build();
 	}
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
