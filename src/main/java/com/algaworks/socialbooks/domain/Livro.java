@@ -14,7 +14,7 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 @Entity
 public class Livro {
-	
+		
 	@Id // DIZ QUE ESSE ATRIBUTOR SERÁ O ID
 	@GeneratedValue(strategy = GenerationType.IDENTITY) // GERA O ID
 	@JsonInclude(Include.NON_NULL) // SE FOR NULO NÃO RETORNA NO JSON

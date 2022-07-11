@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,8 +33,16 @@ public class LivrosResources {
 	}
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
-	public Optional<Livro> buscar(@PathVariable("id") Long id) {
-		return livrosRepository.findById(id);
+	public ResponseEntity<?> buscar(@PathVariable("id") Long id) {
+		Optional<Livro> livro = livrosRepository.findById(id);
+		
+		if (livro==null) {
+			return ResponseEntity.notFound().build();
+			// return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+		}
+		//return ResponseEntity.notFound().build();
+		return ResponseEntity.status(HttpStatus.OK).body(livro);
+		
 	}
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
