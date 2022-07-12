@@ -16,22 +16,25 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.algaworks.socialbooks.domain.Livro;
-import com.algaworks.socialbooks.repository.LivrosRepository;
+import com.algaworks.socialbooks.services.LivrosService;
 
 @RestController
 @RequestMapping("/livros")
 public class LivrosResources {
 	
+	// instanciando o Repository que faz acesso aos dados
 	@Autowired
-	private LivrosService livrosService; // instanciando o Repository que faz acesso aos dados
-	
+	private LivrosService livrosService; 
+
+	// Utilizado do Repository/DAO instanciado para retornar tudo da Livros
 	@RequestMapping(method = RequestMethod.GET)
 	public ResponseEntity<List<Livro>> listar() {
-		return ResponseEntity.status(HttpStatus.OK).body(livrosService.listar()); // Utilizado do Repository/DAO instanciado para retornar tudo da Livros
+		return ResponseEntity.status(HttpStatus.OK).body(livrosService.listar());
 	}
 	
+	// @RequestBody usado para pegar requisição e colocar no objeto
 	@RequestMapping(method = RequestMethod.POST)
-	public ResponseEntity<Void> salvar(@RequestBody Livro livro) { //@RequestBody usado para pegar requisição e colocar no objeto
+	public ResponseEntity<Void> salvar(@RequestBody Livro livro) { 
 		
 		livro = livrosRepository.save(livro);
 		
@@ -42,15 +45,7 @@ public class LivrosResources {
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public ResponseEntity<?> buscar(@PathVariable("id") Long id) {
-		Optional<Livro> livro = livrosRepository.findById(id);
-		
-		if (livro==null) {
-			return ResponseEntity.notFound().build();
-			// return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-		}
-		//return ResponseEntity.notFound().build();
-		return ResponseEntity.status(HttpStatus.OK).body(livro);
-		
+		Optional<Livro> livro = livrosService.buscar(id);		
 	}
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
