@@ -23,11 +23,11 @@ import com.algaworks.socialbooks.repository.LivrosRepository;
 public class LivrosResources {
 	
 	@Autowired
-	private LivrosRepository livrosRepository; // instanciando o Repository que faz acesso aos dados
+	private LivrosService livrosService; // instanciando o Repository que faz acesso aos dados
 	
 	@RequestMapping(method = RequestMethod.GET)
 	public ResponseEntity<List<Livro>> listar() {
-		return ResponseEntity.status(HttpStatus.OK).body(livrosRepository.findAll()); // Utilizado do Repository/DAO instanciado para retornar tudo da Livros
+		return ResponseEntity.status(HttpStatus.OK).body(livrosService.listar()); // Utilizado do Repository/DAO instanciado para retornar tudo da Livros
 	}
 	
 	@RequestMapping(method = RequestMethod.POST)
