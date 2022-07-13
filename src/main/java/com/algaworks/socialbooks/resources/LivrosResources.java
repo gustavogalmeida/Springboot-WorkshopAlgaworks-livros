@@ -75,6 +75,7 @@ public class LivrosResources {
 		}
 		
 		return ResponseEntity.noContent().build();
+		// retorno no content
 	}
 	
 }
