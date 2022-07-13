@@ -17,6 +17,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.algaworks.socialbooks.domain.Livro;
 import com.algaworks.socialbooks.services.LivrosService;
+import com.algaworks.socialbooks.services.exceptions.LivroNaoEncontradoException;
 
 @RestController
 @RequestMapping("/livros")
@@ -36,23 +37,29 @@ public class LivrosResources {
 	@RequestMapping(method = RequestMethod.POST)
 	public ResponseEntity<Void> salvar(@RequestBody Livro livro) { 
 		
-		livro = livrosRepository.save(livro);
+		livro = livrosService.salvar(livro);
 		
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(livro.getId()).toUri();
 		
-		return ResponseEntity.created(uri).build(); // coloca no location do header onde ficou 
+		return ResponseEntity.created(uri).build(); 
 	}
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public ResponseEntity<?> buscar(@PathVariable("id") Long id) {
-		Optional<Livro> livro = livrosService.buscar(id);		
+		Optional<Livro> livro = null;
+		try {
+			livro = livrosService.buscar(id);		
+		} catch (LivroNaoEncontradoException e) {
+			return ResponseEntity.notFound().build();
+		}
+		return ResponseEntity.status(HttpStatus.OK).body(livro);
 	}
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
 	public ResponseEntity<Void> deletar(@PathVariable("id")Long id) {
 		try {
-			livrosRepository.deleteById(id);
-		} catch (EmptyResultDataAccessException e) {
+			livrosService.deletar(id);
+		} catch (LivroNaoEncontradoException e) {
 			return ResponseEntity.notFound().build();
 		}
 		return ResponseEntity.noContent().build();
@@ -60,8 +67,7 @@ public class LivrosResources {
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
 	public ResponseEntity<Void> atualizar(@RequestBody Livro livro, @PathVariable("id")Long id) {
-		livro.setId(id);
-		livrosRepository.save(livro);
+		livrosService.editar(id, livro);
 		return ResponseEntity.noContent().build();
 	}
 	
