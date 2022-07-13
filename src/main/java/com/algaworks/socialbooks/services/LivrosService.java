@@ -25,7 +25,7 @@ public class LivrosService {
 	public Optional<Livro> buscar(Long id) {
 		Optional<Livro> livro = livrosRepository.findById(id);
 		
-		if (livro == null) {
+		if (livro.isEmpty()) {
 			throw new LivroNaoEncontradoException("O livro não pode ser encontrado!");
 		}
 		return livro;
