@@ -67,7 +67,13 @@ public class LivrosResources {
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
 	public ResponseEntity<Void> atualizar(@RequestBody Livro livro, @PathVariable("id")Long id) {
-		livrosService.editar(id, livro);
+		livro.setId(id);
+		try {
+			livrosService.editar(livro);
+		} catch (LivroNaoEncontradoException e) {
+			return ResponseEntity.notFound().build();
+		}
+		
 		return ResponseEntity.noContent().build();
 	}
 	

@@ -44,9 +44,12 @@ public class LivrosService {
 		}
 	}
 	
-	public void editar (Long id, Livro livro) {
-		livro.setId(id);
+	public void editar (Livro livro) {
+		verificaExistencia(livro);
 		livrosRepository.save(livro);
+	}
+	private void verificaExistencia (Livro livro) {
+		buscar(livro.getId());
 	}
 	
 }
