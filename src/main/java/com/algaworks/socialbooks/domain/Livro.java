@@ -33,7 +33,6 @@ public class Livro {
 	private String resumo;
 	
 	@JsonInclude(Include.NON_NULL)
-	@Transient
 	private List<Comentario> comentarios;
 	
 	@JsonInclude(Include.NON_NULL)

@@ -2,14 +2,29 @@ package com.algaworks.socialbooks.domain;
 
 import java.util.Date;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+
+@Entity
 public class Comentario {
 	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@JsonInclude(Include.NON_NULL)
 	private Long id;
 	
+	@JsonInclude(Include.NON_NULL)
 	private String texto;
 	
+	@JsonInclude(Include.NON_NULL)
 	private String usuario;
 	
+	@JsonInclude(Include.NON_NULL)
 	private Date data;
 	
 	public Long getId() {
