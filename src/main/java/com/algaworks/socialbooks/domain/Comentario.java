@@ -1,6 +1,7 @@
 package com.algaworks.socialbooks.domain;
 
 import java.util.Date;
+import java.util.Optional;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -66,6 +67,14 @@ public class Comentario {
 	
 	public void setData(Date data) {
 		this.data = data;
+	}
+
+	public Livro getLivro() {
+		return livro;
+	}
+
+	public void setLivro (Livro livro) {
+		this.livro = livro;
 	}
 	
 }
