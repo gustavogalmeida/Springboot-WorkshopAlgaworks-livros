@@ -15,6 +15,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Entity
 public class Comentario {
@@ -25,6 +26,7 @@ public class Comentario {
 	private Long id;
 	
 	@JsonInclude(Include.NON_NULL)
+	@JsonProperty("comentario")
 	private String texto;
 	
 	@JsonInclude(Include.NON_NULL)
