@@ -7,6 +7,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,7 +21,7 @@ import com.algaworks.socialbooks.domain.Autor;
 import com.algaworks.socialbooks.services.AutoresService;
 
 @RestController
-@RequestMapping("/autores")
+@RequestMapping(value = "/autores", produces = {MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE})
 public class AutoresResource {
 	
 	@Autowired
