@@ -21,53 +21,48 @@
 		<java.version>17</java.version>
 	</properties>
 	
+	
+	
 	<dependencies>
 	
-		
-		<dependency>
+		<dependency> <!-- Spring boot validation -->
     		<groupId>org.springframework.boot</groupId>
     		<artifactId>spring-boot-starter-validation</artifactId>
 		</dependency>
 		
-		<dependency>
+		<dependency> <!-- Accept XML return's and request's -->
 			<groupId>com.fasterxml.jackson.dataformat</groupId>
 			<artifactId>jackson-dataformat-xml</artifactId>
 		</dependency>
 		
-		<dependency>
+		<dependency> <!-- Spring boot web  -->
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
 
-		<dependency>
+		<dependency> <!-- Spring boot test -->
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
 		
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-test</artifactId>
-			<scope>test</scope>
-		</dependency>
-		
-		<dependency>  <!-- Para fazer manipulação de dados, consultas  -->
+		<dependency>  <!-- Data persistence JPA-->
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
 		</dependency>
 		
-		<dependency> <!-- Banco de dados em memoria  -->
+		<dependency> <!-- Database on Memory  -->
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>
 			<scope>runtime</scope>
 		</dependency>
 		
-		<dependency> <!-- Vamos utilizar recurso de reload para testar sem restart -->
+		<dependency> <!-- Auto refresh after save changes -->
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
 		</dependency>
 		
-		<dependency>
+		<dependency> <!-- Java Database -->
         	<groupId>org.springframework.boot</groupId>
         	<artifactId>spring-boot-starter-jdbc</artifactId>
     	</dependency>
