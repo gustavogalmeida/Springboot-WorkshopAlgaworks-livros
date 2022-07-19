@@ -41,6 +41,7 @@ public class AutoresResource {
 	
 	@GetMapping(value = "/{id}")
 	public ResponseEntity<Autor> buscarAutor(@PathVariable("id")Long id){
-		autoresService.listar(id);
+		Autor autor = autoresService.listar(id);
+		return ResponseEntity.status(HttpStatus.OK).body(autor);
 	}
 }
