@@ -4,11 +4,11 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import com.algaworks.socialbooks.domain.Autor;
 import com.algaworks.socialbooks.repository.AutoresRepository;
+import com.algaworks.socialbooks.services.exceptions.AutorExistenteException;
 
 @Service
 public class AutoresService {
@@ -20,7 +20,13 @@ public class AutoresService {
 		return autoresRepository.findAll();
 	}
 	
-	public void criar () {
-		
+	public Autor salvar (Autor autor) {
+		return autoresRepository.save(autor);
 	}
+	
+	public Autor listar(Long id) {
+		return autoresRepository.findById(id).orElseThrow(()-> new AutorExistenteException("Autor não encontrado!"));
+	}
+	
+	
 }
