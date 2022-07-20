@@ -28,7 +28,7 @@ public class LivrosService {
 	}
 	
 	public Livro buscar(Long id) {
-		Livro livro = livrosRepository.findById(id).orElseThrow(()->new LivroNaoEncontradoException("Livro não encontrado"));
+		Livro livro = livrosRepository.findById(id).orElseThrow(()-> new LivroNaoEncontradoException("Livro não encontrado"));
 		
 		return livro;
 	}

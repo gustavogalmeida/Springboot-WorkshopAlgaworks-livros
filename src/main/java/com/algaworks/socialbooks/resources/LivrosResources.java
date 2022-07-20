@@ -50,6 +50,7 @@ public class LivrosResources {
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public ResponseEntity<?> buscar(@PathVariable("id") Long id) {
 		Livro livro = null;
+		
 		livro = livrosService.buscar(id);
 		
 		CacheControl cacheControl = CacheControl.maxAge(20, TimeUnit.SECONDS);

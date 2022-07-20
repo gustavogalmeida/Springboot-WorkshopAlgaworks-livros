@@ -24,8 +24,10 @@ public class AutoresService {
 		return autoresRepository.save(autor);
 	}
 	
-	public Autor listar(Long id) {
-		return autoresRepository.findById(id).orElseThrow(()-> new AutorExistenteException("Autor não encontrado!"));
+	public Autor buscar(Long id) {
+		Autor autor = autoresRepository.findById(id).orElseThrow(()-> new AutorExistenteException("Autor não encontrado!"));
+		
+		return autor;
 	}
 	
 	
